@@ -174,7 +174,7 @@ def play_game():
 
 
 # run functions / play the game
-play_game()
+# play_game()
 
 
 
