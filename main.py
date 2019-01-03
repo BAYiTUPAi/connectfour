@@ -6,12 +6,13 @@ if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
     modes = ["train", "play", "play_ai"]
-    mode_default = "test"
-    print(f"Set mode with --mode command line flag (default {mode_default}, choices {modes})")
-    parser.add_argument("--mode", default=mode_default, choices=modes)
+    print(f"Set mode with --mode command line flag (choices {modes})")
+    parser.add_argument("--mode", choices=modes)
     args = parser.parse_args()
     mode = args.mode
 
+    if mode is None:
+        raise Exception("Need to supply --mode=X")
 
     if mode == "train":
         train_model()

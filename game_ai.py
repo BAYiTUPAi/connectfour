@@ -1,4 +1,4 @@
-def test_horiz(test_val):
+def test_horiz(board_layout, test_val):
     # _
     # return 1 if won
     # return 0 if not-won
@@ -13,7 +13,7 @@ def test_horiz(test_val):
                 in_a_row_count = 0
 
 
-def test_vert(test_val):
+def test_vert(board_layout, test_val):
     # |
     # return 1 if won
     # return 0 if not-won
@@ -27,7 +27,7 @@ def test_vert(test_val):
             else:
                 in_a_row_count = 0
 
-def test_forward_diag(test_val):
+def test_forward_diag(board_layout, test_val):
     # /
     # return 1 if won
     # return 0 if not-won
@@ -57,7 +57,7 @@ def test_forward_diag(test_val):
                 break
 
 
-def test_back_diag(test_val):
+def test_back_diag(board_layout, test_val):
     # \
     # return 1 if won
     # return 0 if not-won
@@ -119,16 +119,16 @@ def detect_winner(board, turn):
     # return 1 or 2 if either of these players won, or return None
     # turn == player turn, but also the value for that player on the board
     # test _
-    if test_horiz(turn):
+    if test_horiz(board, turn):
         return turn
     # test |
-    if test_vert(turn):
+    if test_vert(board, turn):
         return turn
     # test /
-    if test_forward_diag(turn):
+    if test_forward_diag(board, turn):
         return turn
     # test \
-    if test_back_diag(turn):
+    if test_back_diag(board, turn):
         return turn
     return None
 
@@ -146,7 +146,7 @@ def play_game_ai():
     # play the game!
     while not game_won:
         avail_actions = get_actions(board)
-        action = get_model_action(model, board)
+        action = get_model_action(turn, board, model)
         apply_action(turn, board, action)
         if detect_winner(board, turn):
             return turn
